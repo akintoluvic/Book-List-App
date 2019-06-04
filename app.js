@@ -49,6 +49,10 @@ class UI {
         }
     }
 
+    static showAlert{message, className} {
+        const div = document.createElement('div');
+    }
+
     static clearFields() {
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
