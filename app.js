@@ -81,6 +81,7 @@ function addBook() {
         if(title === '' || author === '' || isbn === '') {
             alert('Please fill all fields');
         } else {
+            
             // Instantiate a Book
             const book = new Book(title, author, isbn);
 
