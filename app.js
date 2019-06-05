@@ -82,7 +82,7 @@ class Store {
     }
 
     static addBook(book) {
-
+        
     }
 
     static removeBook(isbn) {
