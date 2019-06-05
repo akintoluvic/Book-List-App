@@ -58,7 +58,7 @@ class UI {
         container.insertBefore(div, form);
 
         // Make disapear in 3 seconds
-        setTimeout(() => document.querySelector('.alert').remove(), 3000);
+        setTimeout(() => document.querySelector('.alert').remove(), 2000);
     }
 
     static clearFields() {
