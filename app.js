@@ -56,6 +56,9 @@ class UI {
         const container = document.querySelector('.container');
         const form = document.querySelector('#book-form');
         container.insertBefore(div, form);
+
+        // Make disapear in 3 seconds
+        setTimeout(() => document.querySelector('.alert').remove(), 3000);
     }
 
     static clearFields() {
@@ -88,7 +91,7 @@ function addBook() {
 
         // Validate inputs
         if(title === '' || author === '' || isbn === '') {
-            alert('Please fill all fields');
+            UI.showAlert('Please fill all fields', 'danger')
         } else {
             
             // Instantiate a Book
