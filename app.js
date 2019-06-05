@@ -100,6 +100,9 @@ function addBook() {
             // Add Book to UI
             UI.addBookToList(book);
 
+            // Show Book added success alert
+            UI.showAlert('Book added to List', 'success');
+
             // Clear Fields
             UI.clearFields();
         }
