@@ -116,5 +116,7 @@ removeBook();
 function removeBook() {
     document.querySelector('#book-list').addEventListener('click', (e) => {
         UI.deleteBook(e.target);
+        // Show Book removed Info alert
+        UI.showAlert('Book removed from List', 'info');
     });
 }
