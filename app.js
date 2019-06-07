@@ -117,7 +117,9 @@ function addBook() {
 
             // Add Book to UI
             UI.addBookToList(book);
-            
+
+            // Add Book to localStorage
+            Store.addBook(book);
 
             // Show Book added success alert
             UI.showAlert('Book added to List', 'success');
@@ -134,8 +136,13 @@ removeBook();
 
 function removeBook() {
     document.querySelector('#book-list').addEventListener('click', (e) => {
+        // Remove Book from UI
         UI.deleteBook(e.target);
+
+        // Remove Book from Store
+        Store.removeBook(e.target.parentElement.previousElementSibling.texxContent);
         // Show Book removed Info alert
         UI.showAlert('Book removed from List', 'info');
     });
 }
+
