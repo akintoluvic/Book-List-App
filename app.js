@@ -142,8 +142,28 @@ function removeBook() {
 
         // Remove Book from Store
         Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+        
         // Show Book removed Info alert
         UI.showAlert('Book removed from List', 'info');
+    });
+}
+
+// Event Edit a book
+editBook();
+
+function editBook() {
+    document.querySelector('#book-list').addEventListener('click', (e) => {
+        // Remove Book from UI
+        UI.restoreBookToInput(e.target);
+
+        // Remove Book from UI
+        UI.deleteBook(e.target);
+
+        // Remove Book from Store
+        Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+        
+        // Show Book removed Info alert
+        UI.showAlert('Now you can edit your book', 'info');
     });
 }
 
