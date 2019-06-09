@@ -24,17 +24,37 @@ class UI {
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.isbn}</td>
-            <td><a href="#" class="btn btn-danger btn-sm delete">X</a>
-            <a href="#" class="btn btn-danger btn-sm edit">Y</a></td>
+            <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+            <td><a href="#" class="btn btn-danger btn-sm edit">Y</a></td>
         `;
 
         list.appendChild(row);
     }
 
     static deleteBook(el) {
-        if(el.classList.contains('delete')) {
+        if(el.classList.contains('edit')) {
+            // Restore value to input boxes
+            const firstChild = el.parentElement.parentElement.firstElementChild;
+            document.querySelector('#title').value = firstChild.textContent;
+            document.querySelector('#author').value = firstChild.nextElementSibling.textContent;
+            document.querySelector('#isbn').value = firstChild.nextElementSibling.nextElementSibling.textContent;
+            
+            // Delete book from UI Book List 
             el.parentElement.parentElement.remove();
-        }
+
+            // Remove Book from Store
+            Store.removeBook(el.parentElement.previousElementSibling.textContent);
+
+          }
+        if(el.classList.contains('delete')) {
+          el.parentElement.parentElement.remove();
+
+          // Remove Book from Store
+          Store.removeBook(el.parentElement.previousElementSibling.textContent);
+          
+          // Show Book removed Info alert
+          UI.showAlert('Book removed from List', 'info');
+      }
     }
 
     static showAlert(message, className) {
@@ -76,6 +96,21 @@ class UI {
       books.push(book);
       localStorage.setItem('books', JSON.stringify(books));
     }
+
+    // static removeAndEditBook(isbn) {
+    //   const books = Store.getBooks();
+  
+    //   books.forEach((book, index) => {
+    //     if(book.isbn === isbn) {
+    //       book.title = document.querySelector('#title').value;
+    //       book.author = document.querySelector('#author').value;
+    //       book.isbn = document.querySelector('#isbn').value;
+    //       // books.splice(index, 1);
+    //     }
+    //   });
+  
+    //   localStorage.setItem('books', JSON.stringify(books));
+    // }
   
     static removeBook(isbn) {
       const books = Store.getBooks();
@@ -133,29 +168,10 @@ function addBook() {
     });
 }
 // Event: Remove a Book
-removeBook();
+editOrDeleteBook();
 
-function removeBook() {
+function editOrDeleteBook() {
     document.querySelector('#book-list').addEventListener('click', (e) => {
-        // Remove Book from UI
-        UI.deleteBook(e.target);
-
-        // Remove Book from Store
-        Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
-        
-        // Show Book removed Info alert
-        UI.showAlert('Book removed from List', 'info');
-    });
-}
-
-// Event Edit a book
-editBook();
-
-function editBook() {
-    document.querySelector('#book-list').addEventListener('click', (e) => {
-        // Remove Book from UI
-        UI.restoreBookToInput(e.target);
-
         // Remove Book from UI
         UI.deleteBook(e.target);
     });
